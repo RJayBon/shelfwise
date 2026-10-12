@@ -83,20 +83,11 @@ CREATE TABLE login_attempts (
   INDEX idx_attempts_email (email, attempted_at)
 );
 
--- ---------------------------------------------------------------
--- Demo accounts
---   Member — member@library.test / member123
---   Staff  — staff@library.test  / staff123
---   Admin  — admin@library.test  / admin123
--- ---------------------------------------------------------------
 INSERT INTO users (user_id, name, email, password_hash, role) VALUES
-  (1, 'Maria Santos', 'member@library.test', '$2y$10$pyuMaw9KMdNRx/0gvPrn7O46Zud6bBl8NHcSCIdH9KiWtZ0jsx0em', 'member'),
-  (2, 'Liam Cruz',    'staff@library.test',  '$2y$10$0DBX9IvzfyTM/rMFn7MNQ.UlYp.FAfAAFHAbi9w9kYHYuD4Ylyitm', 'staff'),
-  (3, 'Ada Reyes',    'admin@library.test',  '$2y$10$suni9sqEW1SIHa2d/lTcA.PcXmpgEEhdLFTdv0Gczpk9lU1aY5ZZO', 'admin');
+  (1, 'Maria Santos', 'member@library.test', '$2a$12$vobmyNPbIDQ91acFqoHY/OTqf6kV/hDG2cvTqMX3WsLD1.nwuudra', 'member'),
+  (2, 'Liam Cruz',    'staff@library.test',  '$2a$12$vobmyNPbIDQ91acFqoHY/OTqf6kV/hDG2cvTqMX3WsLD1.nwuudra', 'staff'),
+  (3, 'Ada Reyes',    'admin@library.test',  '$2a$12$vobmyNPbIDQ91acFqoHY/OTqf6kV/hDG2cvTqMX3WsLD1.nwuudra', 'admin');
 
--- ---------------------------------------------------------------
--- Books — full stock (available_copies = total_copies)
--- ---------------------------------------------------------------
 INSERT INTO books (book_id, title, author, category, isbn, total_copies, available_copies) VALUES
   (1,  'Introduction to Algorithms',              'Cormen, Leiserson, Rivest', 'Computer Science', '978-0262046305', 4, 4),
   (2,  'Clean Code',                              'Robert C. Martin',          'Computer Science', '978-0132350884', 3, 3),
@@ -110,13 +101,3 @@ INSERT INTO books (book_id, title, author, category, isbn, total_copies, availab
   (10, 'Calculus: Early Transcendentals',         'James Stewart',             'Mathematics',      '978-1285741550', 6, 6),
   (11, 'Discrete Mathematics and Its Applications','Kenneth H. Rosen',          'Mathematics',      '978-1259676512', 4, 4),
   (12, 'Atomic Habits',                           'James Clear',               'Psychology',       '978-0735211292', 5, 5);
-
--- ---------------------------------------------------------------
--- Loans / reservations / history: intentionally empty.
--- Every title is fully in stock (43 / 43 copies on shelf).
--- ---------------------------------------------------------------
-
--- Least-privilege app user. Change the password before deploying.
--- CREATE USER IF NOT EXISTS 'library_app'@'localhost' IDENTIFIED BY 'CHANGE_ME';
--- GRANT SELECT, INSERT, UPDATE, DELETE ON shelfwise_db.* TO 'library_app'@'localhost';
--- FLUSH PRIVILEGES;
